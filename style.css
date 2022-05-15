@@ -1,3 +1,4 @@
+/* Initialize different fonts */
 @font-face {
   font-family: "BoldMonk";
   src: url("assets/font/klavika-bold-webfont.woff") format("woff");
@@ -15,6 +16,7 @@
   src: url("assets/font/klavika-regular-webfont.woff") format("woff");
 }
 
+/* Animation keyframes for loader and text transition */
 @keyframes monkBounce {
   from {
     transform: scaleX(1.1);
@@ -33,6 +35,7 @@
   }
 }
 
+/* General styles */
 body {
   margin: 0;
   padding: 0;
@@ -46,12 +49,18 @@ body {
   background-color: #1c1b1b;
 }
 
+a {
+  text-transform: none;
+  color: white;
+}
+
+/* The styles for initial loader */
 #preloader {
   background: black no-repeat center;
   height: 100%;
   width: 100vw;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0px;
   font-family: "RegularMonk";
   font-style: italic;
@@ -81,6 +90,7 @@ body {
   animation: monkBounce 0.8s alternate infinite;
 }
 
+/* The Styles for Media monk logo*/
 .wrap {
   position: absolute;
   height: 70px;
@@ -89,6 +99,14 @@ body {
   right: 0;
   bottom: 0;
 }
+
+#logo {
+  height: 70px;
+  width: auto;
+  fill: white;
+}
+
+/* The Styles for arrow buttons */
 .arrow {
   position: absolute;
   top: 40%;
@@ -98,6 +116,7 @@ body {
   background-color: transparent;
   color: white;
   border: 0;
+  z-index: 1;
 }
 .arrow:focus {
   outline: 0;
@@ -109,6 +128,7 @@ body {
   right: 0;
 }
 
+/* The Styles for all texts in webpage */
 #main-text {
   font-family: "RegularMonk";
   font-size: 40px;
@@ -151,11 +171,12 @@ body {
   text-align: end;
 }
 
-a {
-  text-transform: none;
-  color: white;
+#created-by {
+  margin-top: 30%;
+  font-size: medium;
 }
 
+/* The Styles for navigation bar */
 .nav-container {
   position: absolute;
   bottom: 1%;
@@ -189,12 +210,7 @@ a {
   transition: all 1.5s;
 }
 
-#logo {
-  height: 70px;
-  width: auto;
-  fill: white;
-}
-
+/* Media queries for mobile support */
 @media screen and (max-width: 560px) {
   .nav-container {
     bottom: 10%;
@@ -205,6 +221,20 @@ a {
 }
 
 @media screen and (max-width: 470px) {
+  #monkImg {
+    height: 100px;
+    left: 40%;
+  }
+  #preloader-text {
+    left: 40%;
+  }
+
+  #preloader-secondText {
+    left: 40%;
+  }
+  #main-text {
+    font-size: 30px;
+  }
   #other-text {
     font-size: 30px;
     position: relative;

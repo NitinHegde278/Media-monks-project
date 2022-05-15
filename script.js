@@ -1,6 +1,6 @@
-/* Media Monks Frontend test script...*/
+/* Media Monks Frontend-test script...*/
 
-/* Initialization of constants and DOM elements reference*/
+/* Initialization of constants and reference to DOM elements */
 const textToLeft = [1, 2, 6, 7, 8];
 const textArr = [
   "we are breaking our vow of silence",
@@ -19,6 +19,7 @@ const subText0 =
 const lastSubText = [
   "Interested in joining our monastery?",
   "Check out our current openings on <a href='https://mediamonks.com/careers' target='_blank'>mediamonks.com/careers</a> ",
+  "Created by <a href='https://www.linkedin.com/in/nitin-hegde/' target='_blank'>Nitin C Hegde</a>",
 ];
 const bodyRef = document.body;
 const navTextRef = document.getElementById("nav-text");
@@ -30,6 +31,7 @@ const arrowRightRef = document.getElementById("arrow-right");
 const lastSubTextRef = document.getElementsByClassName("last-sub-text");
 const lastSubText1 = lastSubTextRef.item(0);
 const lastSubText2 = lastSubTextRef.item(1);
+const lastSubText3 = lastSubTextRef.item(2);
 const loader = document.getElementById("preloader");
 const loaderText = document.getElementById("preloader-text");
 const loaderTextSecond = document.getElementById("preloader-secondText");
@@ -74,11 +76,61 @@ setTimeout(() => {
     (loader.style.display = "none");
 }, 4000);
 
-/*Triggered by arrow left button */
-const arrowLeft = () => {
+/* Function to set configuration of page zero */
+const pageZeroConfig = () => {
+  arrowLeftRef.style.visibility = "hidden";
   arrowRightRef.style.visibility = "visible";
   lastSubText1.innerHTML = "";
   lastSubText2.innerHTML = "";
+  lastSubText3.innerHTML = "";
+  mainTextRef.innerHTML = textArr[0];
+  subTextRef.innerHTML = subText0;
+  otherTextRef.innerHTML = "";
+  navTextRef.innerHTML = "";
+};
+
+/* Function to set configuration of page nine */
+const pageNineConfig = () => {
+  arrowLeftRef.style.visibility = "visible";
+  arrowRightRef.style.visibility = "hidden";
+  otherTextRef.style.left = "unset";
+  otherTextRef.style.top = "20px";
+  otherTextRef.style.right = "20px";
+  otherTextRef.style.textAlign = "end";
+  navTextRef.innerHTML = "";
+  mainTextRef.innerHTML = "";
+  subTextRef.innerHTML = "";
+  lastSubText1.innerHTML = lastSubText[0];
+  lastSubText2.innerHTML = lastSubText[1];
+  lastSubText3.innerHTML = lastSubText[2];
+};
+
+/* Function to empty texts not required*/
+const emptyTextsInBetween = () => {
+  mainTextRef.innerHTML = "";
+  lastSubText1.innerHTML = "";
+  lastSubText2.innerHTML = "";
+  lastSubText3.innerHTML = "";
+  subTextRef.innerHTML = "";
+};
+
+/* Function to align the texts to left or right*/
+const alignment = (page) => {
+  let align = textToLeft.find((ele) => page == ele) ? "left" : "right";
+  if (align === "left") {
+    otherTextRef.style.right = "unset";
+    otherTextRef.style.left = "0px";
+    otherTextRef.style.textAlign = "unset";
+  } else {
+    otherTextRef.style.left = "unset";
+    otherTextRef.style.right = "60px";
+    otherTextRef.style.textAlign = "end";
+  }
+};
+
+/* Function Triggered by arrow left button */
+const arrowLeft = () => {
+  arrowRightRef.style.visibility = "visible";
   if (position > 0 && page >= 0) {
     page -= 1;
     const buttonRef = document.getElementById(`b${page}`);
@@ -87,31 +139,20 @@ const arrowLeft = () => {
     bodyRef.style.backgroundPosition = position + "% -5vh";
     bodyRef.style.transition = "all 1.5s";
     bodyRef.animate(keyFrameProps, keyFrameDuration);
-
+    lastSubText1.innerHTML = "";
+    lastSubText2.innerHTML = "";
+    lastSubText3.innerHTML = "";
     if (page > 0) {
       otherTextRef.style.top = "43%";
       mainTextRef.innerHTML = "";
-      let align = textToLeft.find((ele) => page == ele) ? "left" : "right";
       otherTextRef.innerHTML = textArr[page];
-      if (align === "left") {
-        otherTextRef.style.right = "unset";
-        otherTextRef.style.left = "0px";
-        otherTextRef.style.textAlign = "unset";
-      } else {
-        otherTextRef.style.left = "unset";
-        otherTextRef.style.right = "60px";
-        otherTextRef.style.textAlign = "end";
-      }
+      alignment(page);
       subTextRef.innerHTML = "";
       navTextRef.innerHTML = `Step ${page} out of 8 on the path to digital enlightment`;
       navTextRef.style.transition = "unset";
       navTextRef.style.transition = "all 1s ease";
     } else if (page == 0) {
-      arrowLeftRef.style.visibility = "hidden";
-      otherTextRef.innerHTML = "";
-      mainTextRef.innerHTML = textArr[0];
-      subTextRef.innerHTML = subText0;
-      navTextRef.innerHTML = "";
+      pageZeroConfig();
     }
   } else {
     const buttonRef = document.getElementById(`b${page}`);
@@ -119,12 +160,11 @@ const arrowLeft = () => {
   }
 };
 
-/*Triggered by arrow right button */
+/*Function Triggered by arrow right button */
 const arrowRight = () => {
   arrowLeftRef.style.visibility = "visible";
   arrowRightRef.style.visibility = "visible";
   if (position < 105 && page <= 9) {
-    subTextRef.innerHTML = "";
     page += 1;
     const buttonRef = document.getElementById(`b${page}`);
     buttonRef.focus();
@@ -132,34 +172,14 @@ const arrowRight = () => {
     bodyRef.style.backgroundPosition = position + "% -5vh";
     bodyRef.style.transition = "all 1.5s";
     bodyRef.animate(keyFrameProps, keyFrameDuration);
-
+    otherTextRef.innerHTML = textArr[page];
     if (page < 9 && page > 0) {
-      mainTextRef.innerHTML = "";
-      lastSubText1.innerHTML = "";
-      lastSubText2.innerHTML = "";
-      let align = textToLeft.find((ele) => page == ele) ? "left" : "right";
-      otherTextRef.innerHTML = textArr[page];
+      emptyTextsInBetween();
       otherTextRef.style.top = "43%";
-      if (align === "left") {
-        otherTextRef.style.right = "unset";
-        otherTextRef.style.left = "0px";
-        otherTextRef.style.textAlign = "unset";
-      } else {
-        otherTextRef.style.left = "unset";
-        otherTextRef.style.right = "60px";
-        otherTextRef.style.textAlign = "end";
-      }
+      alignment(page);
       navTextRef.innerHTML = `Step ${page} out of 8 on the path to digital enlightment`;
     } else if (page == 9) {
-      arrowRightRef.style.visibility = "hidden";
-      lastSubText1.innerHTML = lastSubText[0];
-      lastSubText2.innerHTML = lastSubText[1];
-      otherTextRef.style.left = "unset";
-      otherTextRef.style.right = "20px";
-      otherTextRef.style.top = "20px";
-      otherTextRef.style.textAlign = "end";
-      otherTextRef.innerHTML = textArr[page];
-      navTextRef.innerHTML = "";
+      pageNineConfig();
     }
   } else {
     const buttonRef = document.getElementById(`b${page}`);
@@ -167,50 +187,21 @@ const arrowRight = () => {
   }
 };
 
-/*Triggered by clicking on navigation buttons */
+/*Funtion Triggered by clicking on navigation buttons */
 const navigation = (event) => {
   page = parseInt(event.target.value);
   otherTextRef.innerHTML = textArr[page];
   otherTextRef.style.top = "43%";
-  lastSubText1.innerHTML = lastSubText[0];
-  lastSubText2.innerHTML = lastSubText[1];
+  arrowLeftRef.style.visibility = "visible";
+  arrowRightRef.style.visibility = "visible";
   if (page > 0 && page < 9) {
-    arrowLeftRef.style.visibility = "visible";
-    arrowRightRef.style.visibility = "visible";
-    lastSubText1.innerHTML = "";
-    lastSubText2.innerHTML = "";
-    let align = textToLeft.find((ele) => page == ele) ? "left" : "right";
-    mainTextRef.innerHTML = "";
-    subTextRef.innerHTML = "";
-    if (align === "left") {
-      otherTextRef.style.right = "unset";
-      otherTextRef.style.left = "0px";
-      otherTextRef.style.textAlign = "unset";
-    } else {
-      otherTextRef.style.left = "unset";
-      otherTextRef.style.right = "60px";
-      otherTextRef.style.textAlign = "end";
-    }
+    emptyTextsInBetween();
+    alignment(page);
     navTextRef.innerHTML = `Step ${page} out of 8 on the path to digital enlightment`;
   } else if (page == 9) {
-    arrowLeftRef.style.visibility = "visible";
-    arrowRightRef.style.visibility = "hidden";
-    otherTextRef.style.left = "unset";
-    otherTextRef.style.top = "20px";
-    otherTextRef.style.right = "20px";
-    otherTextRef.style.textAlign = "end";
-    navTextRef.innerHTML = "";
-    mainTextRef.innerHTML = "";
-    subTextRef.innerHTML = "";
+    pageNineConfig();
   } else if (page == 0) {
-    arrowLeftRef.style.visibility = "hidden";
-    arrowRightRef.style.visibility = "visible";
-    lastSubText1.innerHTML = "";
-    lastSubText2.innerHTML = "";
-    mainTextRef.innerHTML = textArr[0];
-    subTextRef.innerHTML = subText0;
-    otherTextRef.innerHTML = "";
-    navTextRef.innerHTML = "";
+    pageZeroConfig();
   }
   position = page * 12.5;
   bodyRef.style.backgroundPosition = position + "% -5vh";

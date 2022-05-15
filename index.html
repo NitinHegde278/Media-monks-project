@@ -6,22 +6,31 @@
     <link rel="stylesheet" href="style.css" />
     <title>MediaMonks | The path to digital enlightment</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <script src="script.js" type="text/javascript" async></script>
   </head>
   <body>
+    <!-- Loader -->
     <div id="preloader">
       <img id="monkImg" src="assets/images/monk.png" alt="monk" />
       <span id="preloader-text">Patience!</span>
       <span id="preloader-secondText"></span>
     </div>
+
+    <!-- Arrow keys -->
     <button id="arrow-left" class="arrow" onclick="arrowLeft()"><</button>
     <button id="arrow-right" class="arrow" onclick="arrowRight()">></button>
+
+    <!-- Texts to display -->
     <div id="main-text"></div>
     <div id="sub-text"></div>
     <div id="other-text"></div>
     <div id="last-sub-text-container">
       <span class="last-sub-text"></span>
       <span class="last-sub-text"></span>
+      <span id="created-by" class="last-sub-text"></span>
     </div>
+
+    <!-- Navigation bar -->
     <div class="nav-container">
       <button
         id="b0"
@@ -61,9 +70,10 @@
       ></button>
       <div id="nav-text"></div>
     </div>
+
+    <!-- Media monk logo -->
     <div class="wrap">
       <img id="logo" src="assets/images/logo.svg" alt="logo" />
     </div>
-    <script src="script.js" type="text/javascript"></script>
   </body>
 </html>
