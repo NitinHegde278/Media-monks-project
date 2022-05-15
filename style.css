@@ -212,11 +212,22 @@ a {
 
 /* Media queries for mobile support */
 @media screen and (max-width: 560px) {
+  #preloader {
+    height: 100%;
+    width: 100%;
+  }
+
   .nav-container {
     bottom: 10%;
   }
   #sub-text {
     bottom: 20%;
+  }
+  .wrap {
+    padding: 0px;
+  }
+  #logo {
+    height: 50px;
   }
 }
 
@@ -226,12 +237,17 @@ a {
     left: 40%;
   }
   #preloader-text {
-    left: 40%;
+    left: 30%;
   }
 
   #preloader-secondText {
-    left: 40%;
+    left: 30%;
   }
+
+  #arrow-right {
+    margin-right: -90%;
+  }
+
   #main-text {
     font-size: 30px;
   }
